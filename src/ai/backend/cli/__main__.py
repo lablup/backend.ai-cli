@@ -14,5 +14,9 @@ for entrypoint in pkg_resources.iter_entry_points(entry_prefix):
         plugin = entrypoint.load().commands
         for command in plugin:
             main.add_command(plugin[command], name=command)
-    else:
+    elif entrypoint.name == "mgr" or entrypoint.name == "ag":
         main.add_command(entrypoint.load(), name=entrypoint.name)
+    else:
+        plugin = main.commands
+        for command in plugin:
+            plugin[command].add_command(entrypoint.load(), name=entrypoint.name)
