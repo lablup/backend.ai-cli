@@ -17,9 +17,6 @@ os:
   - linux
   # - osx  # Travis CI does not officially support Python on macOS.
 
-matrix:
-  fast_finish: true
-
 # test stage
 install:
   - pip install -U --upgrade-strategy=eager pip setuptools
@@ -33,6 +30,7 @@ after_success:
 
 # other stages
 jobs:
+  fast_finish: true
   include:
     - stage: deploy
       python: "3.8"
