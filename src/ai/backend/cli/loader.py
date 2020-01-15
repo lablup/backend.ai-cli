@@ -1,7 +1,8 @@
-try:
+import sys
+if sys.version_info < (3, 8, 0):
+    from importlib_metadata import entry_points
+else:
     from importlib.metadata import entry_points
-except ImportError:
-    from importlib_metadata import entry_points  # type: ignore
 
 
 def load_entry_points(install_target):

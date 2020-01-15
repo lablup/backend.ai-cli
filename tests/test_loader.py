@@ -1,14 +1,16 @@
 from unittest import mock
 
-try:
-    from importlib.metadata import EntryPoint
-except ImportError:
-    from importlib_metadata import EntryPoint  # type: ignore
+import sys
 from typing import Any, Dict
 
 import click
 
 from ai.backend.cli.loader import load_entry_points
+
+if sys.version_info < (3, 8, 0):
+    from importlib_metadata import EntryPoint
+else:
+    from importlib.metadata import EntryPoint
 
 
 class DummyCommandGroup:
