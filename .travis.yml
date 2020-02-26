@@ -19,11 +19,9 @@ os:
 
 # test stage
 install:
-  - pip install -U --upgrade-strategy=eager pip setuptools
-  - pip install -U --upgrade-strategy=eager -e ".[dev,build,test]"
+  - pip install -U pip setuptools
+  - pip install -U -r requirements/ci.txt
 script:
-  - python -m flake8 ai/backend tests
-  - python -m mypy src/ai/backend tests
   - python -m pytest --cov=ai.backend.cli -v
 after_success:
   - codecov
