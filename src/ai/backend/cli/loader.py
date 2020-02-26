@@ -22,5 +22,5 @@ def load_entry_points() -> click.Group:
                 main.add_command(subcmd, name=prefix)
             else:
                 subcmd = entrypoint.load()
-                main.commands[prefix].add_command(subcmd, name=subprefix)
+                main.commands[prefix].add_command(subcmd, name=subprefix)  # type: ignore
     return main

@@ -9,6 +9,6 @@ from .extensions import AliasGroup
         'help_option_names': ['-h', '--help'],
     },
 )
-def main():
+def main() -> click.Group:
     '''Unified Command Line Interface for Backend.ai'''
     pass
