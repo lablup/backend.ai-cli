@@ -1,10 +1,10 @@
 import click
 
-from .extensions import AliasGroup
+from .extensions import ExtendedCommandGroup
 
 
 @click.group(
-    cls=AliasGroup,
+    cls=ExtendedCommandGroup,
     context_settings={
         'help_option_names': ['-h', '--help'],
     },
