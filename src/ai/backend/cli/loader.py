@@ -1,8 +1,8 @@
 import sys
-if sys.version_info < (3, 8, 0):
-    from importlib_metadata import entry_points
+if sys.version_info >= (3, 8, 0):
+    from importlib.metadata import entry_points
 else:
-    from importlib.metadata import entry_points  # type: ignore
+    from importlib_metadata import entry_points  # type: ignore
 
 import click            # noqa: E402
 
