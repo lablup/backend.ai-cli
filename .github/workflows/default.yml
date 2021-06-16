@@ -61,9 +61,9 @@ jobs:
         python-version: 3.8
     - name: Cache pip packages
       uses: actions/cache@v2
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ hashFiles('requirements/*.txt') }}
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ hashFiles('requirements/*.txt') }}
     - name: Install dependencies
       env:
           REQUIREMENTS_FILE: typecheck
