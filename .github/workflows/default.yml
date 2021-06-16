@@ -1,4 +1,4 @@
-name: defaults
+name: default
 
 on: [push, pull_request]
 
