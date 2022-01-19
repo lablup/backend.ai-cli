@@ -73,3 +73,43 @@ def ask_file_path(prompt: str):
             break
         print("Please answer a correct file path.")
     return user_reply
+
+
+def ask_yn(prompt: str = 'Are you sure?', default: str = 'y') -> bool:
+    if default == 'y':
+        choices = 'Y/n'
+    elif default == 'n':
+        choices = 'y/N'
+    else:
+        raise ValueError("default must be given either 'y' or 'n'.")
+    while True:
+        user_reply = input("{0} [{1}] ".format(prompt, choices)).lower()
+        if user_reply == '':
+            user_reply = default
+        if user_reply in ('y', 'yes', 'n', 'no'):
+            break
+        else:
+            print("Please answer in y/yes/n/no.")
+    if user_reply[:1].lower() == 'y':
+        return True
+    return False
+
+
+def ask_tf(prompt: str = 'Are you sure?', default: str = 'true') -> bool:
+    if default == 't':
+        choices = 'T/f'
+    elif default == 'f':
+        choices = 't/F'
+    else:
+        raise ValueError("default must be given either 'true' or 'n'.")
+    while True:
+        user_reply = input(f"{prompt} [{choices}] ").lower()
+        if user_reply == '':
+            user_reply = default
+        if user_reply in ('t', 'true', 'f', 'false'):
+            break
+        else:
+            print("Please answer in t/true/f/false.")
+    if user_reply[:1].lower() == 't':
+        return True
+    return False
