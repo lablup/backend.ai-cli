@@ -56,7 +56,8 @@ def ask_string_in_array(prompt: str, default: str = "", choices: list = None):
     if choices is None:
         choices = []
     while True:
-        user_reply = input(f"{prompt}(choices: {','.join([x if x.strip() else 'empty' for x in choices])}): ")
+        user_reply = input(f"{prompt}"
+                           f"(choices: {','.join([x if x.strip() else 'empty' for x in choices])}): ")
         if user_reply == "":
             user_reply = default
         if user_reply.lower() in choices:
