@@ -1,6 +1,8 @@
 import ipaddress
 import os
 
+from pathlib import Path
+
 
 def ask_host(prompt: str, default: str = "127.0.0.1") -> str:
     try:
@@ -67,13 +69,24 @@ def ask_string_in_array(prompt: str, default: str = "", choices: list = None):
     return user_reply
 
 
-def ask_file_path(prompt: str):
+def ask_path(prompt: str, is_file=True, is_directory=True) -> Path:
+    if not (is_file or is_directory):
+        print("One of args(is_file/is_directory) has True value.")
     while True:
         user_reply = input(f"{prompt}: ")
-        if os.path.exists(user_reply):
+        path = Path(user_reply)
+        if is_file and path.is_file():
             break
-        print("Please answer a correct file path.")
-    return user_reply
+        if is_directory and path.is_dir():
+            break
+
+        if is_file and is_directory:
+            print("Please answer a correct file/directory path.")
+        elif is_file:
+            print("Please answer a correct file path.")
+        elif is_directory:
+            print("Please answer a correct directory path.")
+    return path
 
 
 def ask_yn(prompt: str = 'Are you sure?', default: str = 'y') -> bool:
