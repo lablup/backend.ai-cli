@@ -1,22 +1,25 @@
 import ipaddress
-import os
-
 from pathlib import Path
+from urllib.error import HTTPError
+from urllib.request import urlopen
 
 
-def ask_host(prompt: str, default: str = "127.0.0.1") -> str:
-    try:
-        default = default.replace("localhost", "127.0.0.1")
-        _ = ipaddress.ip_address(default)
-    except ValueError:
-        raise ValueError("IP host must be given as 127.0.0.1")
-
+def ask_host(prompt: str, default: str = "127.0.0.1", allow_hostname=False) -> str:
     while True:
         user_reply = input(f"{prompt}(default: {default}): ")
         if user_reply == "":
             user_reply = default
         try:
-            _ = ipaddress.ip_address(user_reply)
+            if allow_hostname:
+                url = user_reply
+                if not (user_reply.startswith("http://") or user_reply.startswith("https://")):
+                    url = f"http://{user_reply}"
+                try:
+                    urlopen(url)
+                    break
+                except HTTPError:
+                    print("Please input correct URL.")
+            ipaddress.ip_address(user_reply)
             break
         except ValueError:
             print("Please input correct host.")
