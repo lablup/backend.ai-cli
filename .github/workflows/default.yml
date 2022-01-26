@@ -50,10 +50,10 @@ jobs:
       run: |
         pip install -U pip setuptools
         pip install -U -r requirements/ci.txt
-        - name: Prepare testing
-          run: |
-            mkdir -p /tmp/interaction_test/
-            touch /tmp/interaction_test/test.txt
+    - name: Prepare testing
+      run: |
+        mkdir -p /tmp/interaction_test/
+        touch /tmp/interaction_test/test.txt
     - name: Test with pytest
       run: |
         python -m pytest --cov=ai.backend.cli -v
