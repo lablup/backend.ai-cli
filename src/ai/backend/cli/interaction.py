@@ -10,7 +10,7 @@ Numeric = TypeVar("Numeric", int, float, Decimal)
 
 def ask_host(prompt: str, default: str = "127.0.0.1", allow_hostname=False) -> str:
     while True:
-        user_reply = input(f"{prompt}(default: {default}): ")
+        user_reply = input(f"{prompt} (default: {default}): ")
         if user_reply == "":
             user_reply = default
         try:
@@ -32,7 +32,7 @@ def ask_host(prompt: str, default: str = "127.0.0.1", allow_hostname=False) -> s
 
 def ask_number(prompt: str, default: Numeric, min_value: Numeric, max_value: Numeric) -> Numeric:
     while True:
-        user_reply = input(f"{prompt}(default: {default}): ")
+        user_reply = input(f"{prompt} (default: {default}): ")
         try:
             if user_reply == "":
                 return default
@@ -47,12 +47,12 @@ def ask_number(prompt: str, default: Numeric, min_value: Numeric, max_value: Num
 def ask_string(prompt: str, default: str = "", use_default: bool = True) -> str:
     while True:
         if use_default:
-            user_reply = input(f"{prompt}(default: \"{default}\"): ")
+            user_reply = input(f"{prompt} (default: \"{default}\"): ")
             if user_reply == "":
                 return default
             return user_reply
         else:
-            user_reply = input(f"{prompt}(if you don\'t want, just leave empty): ")
+            user_reply = input(f"{prompt} (if you don\'t want, just leave empty): ")
             return user_reply
 
 
@@ -60,7 +60,7 @@ def ask_string_in_array(prompt: str, default: str = "", choices: list = None):
     if choices is None:
         choices = []
     while True:
-        user_reply = input(f"{prompt}"
+        user_reply = input(f"{prompt} "
                            f"(choices: {','.join([x if x.strip() else 'empty' for x in choices])}): ")
         if user_reply == "":
             user_reply = default
