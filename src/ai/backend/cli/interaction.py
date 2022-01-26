@@ -73,7 +73,8 @@ def ask_string_in_array(prompt: str, choices: list, default: str) -> Optional[st
         choices.remove("")
 
     if default:
-        question = f"{prompt} (choices: {'/'.join(choices)}, if left empty, this will use default value: {default}): "
+        question = f"{prompt} (choices: {'/'.join(choices)}, " \
+                   f"if left empty, this will use default value: {default}): "
     else:
         question = f"{prompt} (choices: {'/'.join(choices)}, if left empty, this will remove this key): "
 
