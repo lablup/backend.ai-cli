@@ -1,7 +1,11 @@
 import ipaddress
+from decimal import Decimal
 from pathlib import Path
+from typing import TypeVar, cast
 from urllib.error import HTTPError
 from urllib.request import urlopen
+
+Numeric = TypeVar("Numeric", int, float, Decimal)
 
 
 def ask_host(prompt: str, default: str = "127.0.0.1", allow_hostname=False) -> str:
@@ -26,23 +30,18 @@ def ask_host(prompt: str, default: str = "127.0.0.1", allow_hostname=False) -> s
     return user_reply
 
 
-def ask_number(prompt: str, default: int = 0, min_value: int = 0, max_value: int = 0) -> int:
-    try:
-        port = default
-    except ValueError:
-        raise ValueError("Default value must be given as integer")
-
+def ask_number(prompt: str, default: Numeric, min_value: Numeric, max_value: Numeric) -> Numeric:
     while True:
         user_reply = input(f"{prompt}(default: {default}): ")
-        if user_reply == "":
-            return port
         try:
-            if user_reply.isdigit() and min_value <= int(user_reply) <= max_value:
-                port = int(user_reply)
+            if user_reply == "":
+                return default
+            if user_reply.isdigit() and min_value <= cast(Numeric, user_reply) <= max_value:
+                user_reply_numeric = cast(Numeric, user_reply)
                 break
         except ValueError:
             print(f"Please input correct number between {min_value}~{max_value}.")
-    return port
+    return user_reply_numeric
 
 
 def ask_string(prompt: str, default: str = "", use_default: bool = True) -> str:
