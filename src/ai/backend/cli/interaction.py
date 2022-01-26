@@ -1,7 +1,7 @@
 import ipaddress
 from decimal import Decimal
 from pathlib import Path
-from typing import TypeVar, cast
+from typing import TypeVar
 from urllib.error import HTTPError
 from urllib.request import urlopen
 
