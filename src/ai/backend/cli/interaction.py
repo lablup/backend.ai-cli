@@ -30,14 +30,23 @@ def ask_host(prompt: str, default: str = "127.0.0.1", allow_hostname=False) -> s
     return user_reply
 
 
+def convert_str_into_numeric(user_reply: str) -> Numeric:
+    if user_reply.isdigit():
+        return int(user_reply)
+    try:
+        return float(user_reply)
+    except ValueError:
+        assert ValueError
+
+
 def ask_number(prompt: str, default: Numeric, min_value: Numeric, max_value: Numeric) -> Numeric:
     while True:
         user_reply = input(f"{prompt} (default: {default}): ")
         try:
             if user_reply == "":
                 return default
-            if user_reply.isdigit() and min_value <= cast(Numeric, user_reply) <= max_value:
-                user_reply_numeric = cast(Numeric, user_reply)
+            if user_reply.isdigit() and min_value <= convert_str_into_numeric(user_reply) <= max_value:
+                user_reply_numeric = convert_str_into_numeric(user_reply)
                 break
         except ValueError:
             print(f"Please input correct number between {min_value}~{max_value}.")
