@@ -1,7 +1,7 @@
 import ipaddress
 from decimal import Decimal
 from pathlib import Path
-from typing import TypeVar
+from typing import TypeVar, Optional
 from urllib.error import HTTPError
 from urllib.request import urlopen
 
@@ -65,18 +65,30 @@ def ask_string(prompt: str, default: str = "", use_default: bool = True) -> str:
             return user_reply
 
 
-def ask_string_in_array(prompt: str, default: str = "", choices: list = None):
-    if choices is None:
-        choices = []
+def ask_string_in_array(prompt: str, choices: list, default: str) -> Optional[str]:
+    if default and default not in choices:
+        print("Default value should be in choices args.")
+        return None
+    if "" in choices:
+        choices.remove("")
+
+    if default:
+        question = f"{prompt} (choices: {'/'.join(choices)}, if left empty, this will use default value: {default}): "
+    else:
+        question = f"{prompt} (choices: {'/'.join(choices)}, if left empty, this will remove this key): "
+
     while True:
-        user_reply = input(f"{prompt} "
-                           f"(choices: {','.join([x if x.strip() else 'empty' for x in choices])}): ")
+        user_reply = input(question)
         if user_reply == "":
-            user_reply = default
-        if user_reply.lower() in choices:
+            if default:
+                user_reply = default
+            else:
+                return None
+            break
+        elif user_reply.lower() in choices:
             break
         else:
-            print(f"Please answer in {','.join(choices)}.")
+            print(f"Please answer in {'/'.join(choices)}.")
     return user_reply
 
 
