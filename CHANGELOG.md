@@ -16,10 +16,11 @@ Changes
 
 <!-- towncrier release notes start -->
 
+## 0.6.0 (2022-03-14)
 
-## Older changelogs
+### Features
+* Add a new module `cli.interaction` to provide reusable user input validation routines ([#2](https://github.com/lablup/backend.ai-cli/issues/2))
 
-* [21.09](https://github.com/lablup/backend.ai-client-py/blob/21.09/CHANGELOG.md)
-* [21.03](https://github.com/lablup/backend.ai-client-py/blob/21.03/CHANGELOG.md)
-* [20.09](https://github.com/lablup/backend.ai-client-py/blob/20.09/CHANGELOG.md)
-* [20.03](https://github.com/lablup/backend.ai-client-py/blob/20.03/CHANGELOG.md)
+### Miscellaneous
+* Add a workflow step to create temp file/directories to test `ask_path` ([#3](https://github.com/lablup/backend.ai-cli/issues/3))
+* Adopt towncrier in the CI ([#5](https://github.com/lablup/backend.ai-cli/issues/5))
