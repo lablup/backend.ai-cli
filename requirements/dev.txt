@@ -1,1 +1,1 @@
--e .[test,lint,typecheck]
+-e .[dev,test,lint,typecheck]
