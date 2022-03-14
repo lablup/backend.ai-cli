@@ -1,11 +1,11 @@
 import ipaddress
-from decimal import Decimal
 from pathlib import Path
-from typing import TypeVar, Optional
+from typing import Optional, Union
 from urllib.error import HTTPError
 from urllib.request import urlopen
 
-Numeric = TypeVar("Numeric", int, float, Decimal)
+
+Numeric = Union[int, float]
 
 
 def ask_host(prompt: str, default: str = "127.0.0.1", allow_hostname=False) -> str:
@@ -33,10 +33,7 @@ def ask_host(prompt: str, default: str = "127.0.0.1", allow_hostname=False) -> s
 def convert_str_into_numeric(user_reply: str) -> Numeric:
     if user_reply.isdigit():
         return int(user_reply)
-    try:
-        return float(user_reply)
-    except ValueError:
-        assert ValueError
+    return float(user_reply)
 
 
 def ask_number(prompt: str, default: Numeric, min_value: Numeric, max_value: Numeric) -> Numeric:
